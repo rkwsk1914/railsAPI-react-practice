@@ -256,7 +256,7 @@ class Postapp extends React.Component {
     
     //読み込んだデータから要素を生成する
     const domItem = this.state.items.data.map(e => {
-      return <li>{ e.title }</li>
+      return <li key={e.id }>{ e.title }</li>
     })
     return (
       <div className='App'>
@@ -366,7 +366,7 @@ class Picutreapp extends React.Component {
       processData: false,
       contentType: false,
       data: formdata,　 //データにFormがserialzeした結果を入れる
-      //timeout: 10000,
+      timeout: 2000,
       success: function(json) {
         console.log('Post JSON: ', json)
       },
@@ -374,7 +374,10 @@ class Picutreapp extends React.Component {
         console.log('Error Post: ', XMLHttpRequest,textStatus,errorThrown)
       }
     });
-    this.httpRequest()
+    setTimeout(() => {
+      this.httpRequest()
+    }, 2000);
+  
   }
   
   render() {
@@ -388,7 +391,7 @@ class Picutreapp extends React.Component {
     
     //読み込んだデータから要素を生成する
     const domItem = this.state.items.data.map(e => {
-      return <li><img src={ e.src.url } alt="" width="384" height="128"></img></li>
+      return <li key={e.id }><img src={ e.src.url } alt="" width="384" height="128"></img></li>
     })
     return (
       <div className='App'>
@@ -409,12 +412,7 @@ class Picutreapp extends React.Component {
  */
 //DOM生成 
 const DOM = <div className="row d-flex justify-content-around">
-  <div className="col-6">
-    <Picutreapp />
-  </div>
-  <div className="col-6">
-    <Postapp />
-  </div>
+  <Picutreapp />
 </div>
 
 const DOM2 = <FileInput />
